@@ -43,10 +43,14 @@ footer {
     display: flex;
     justify-content: center;
     background-color: #2e6da4;
+    flex-wrap: wrap; /* stavke se prelamaju u novi red */
+
 }
 
 .menu li {
     position: relative;
+    flex: 1 1 auto; /* fleksibilno širina stavki */
+
 }
 
 .menu li a {
@@ -107,9 +111,16 @@ section a {
 .center-image {
     display: block;
     margin: 50px auto 20px auto;
-    max-width: 1000px;
+    max-width: 80%; /* zauzima 80% širine ekrana */
     height: auto;
 }
+
+main section {
+    margin: 20px auto;
+    max-width: 95%; /* fleksibilna širina */
+    text-align: justify;
+}
+
 </style>
 </head>
 <body>
@@ -150,7 +161,7 @@ section a {
     <section id="obavijesti">
         <h2>Obavijesti</h2>
         <ul>
-            <li><a href="pdf/listic.pdf" target="_blank">Otvorite PDF listić</a></li>
+            //<li><a href="pdf/listic.pdf" target="_blank">Otvorite PDF listić</a></li>
         </ul>
     </section>
 
