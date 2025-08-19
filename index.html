@@ -21,36 +21,42 @@ h1, h2 {
     font-family: 'Playfair Display', serif;
 }
 
-/* Header i footer isti stil */
-header, footer {
+header {
     background-color: #1f4f73;
     color: white;
     padding: 20px;
     flex-shrink: 0;
+    position: relative;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+/* Hamburger dugme (samo za mobitele) */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
-/* Horizontalni izbornik */
+/* Horizontalni izbornik za desktop */
 .menu {
     list-style: none;
-    margin: 20px 0;
+    margin: 20px 0 0 0;
     padding: 0;
     display: flex;
     justify-content: center;
     background-color: #2e6da4;
-    flex-wrap: wrap; /* stavke se prelamaju u novi red */
-
+    flex-wrap: wrap;
 }
 
 .menu li {
     position: relative;
-    flex: 1 1 auto; /* fleksibilno širina stavki */
-
+    flex: 1 1 auto;
+    text-align: center;
 }
 
 .menu li a {
@@ -111,23 +117,51 @@ section a {
 .center-image {
     display: block;
     margin: 50px auto 20px auto;
-    max-width: 80%; /* zauzima 80% širine ekrana */
+    max-width: 90%;
     height: auto;
+    border-radius: 10px;
 }
 
 main section {
     margin: 20px auto;
-    max-width: 95%; /* fleksibilna širina */
+    max-width: 95%;
     text-align: justify;
 }
 
+/* 📱 Responsivnost */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    nav {
+        display: none;
+        width: 100%;
+    }
+    nav.active {
+        display: block;
+    }
+    .menu {
+        flex-direction: column;
+    }
+    .menu li {
+        flex: 1 1 100%;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+    .center-image {
+        max-width: 100%;
+        margin: 20px auto;
+    }
+}
 </style>
 </head>
 <body>
 
 <header>
     <h1>Župa svete Terezije od Djeteta Isusa Ledinac</h1>
-    <nav>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav id="navMenu">
         <ul class="menu">
             <li><a href="#" onclick="showSection('o-nama')">O župi</a></li>
             <li><a href="#" onclick="showSection('novosti')">Novosti</a></li>
@@ -146,11 +180,11 @@ main section {
 <main>
     <section id="o-nama">
         <h2>O župi</h2>
-        <p>
-            Mjesto Ledinac se već u srednjem vijeku spominje kao jedno od naselja Imotske krajine, na krajnjem istočnom rubu Imotskog polja. O životu ovoga mjesta svjedoči srednjovjekovna nekropola na staroj ilirskoj gomili, bogata stećcima raznih veličina i oblika. Mjesto je kroz povijest pripadalo župama Drinovci, zatim Ružići, potom Široki Brijeg te konačno, Rasno.</p>
+        <p>Mjesto Ledinac se već u srednjem vijeku spominje kao jedno od naselja Imotske krajine, na krajnjem istočnom rubu Imotskog polja. O životu ovoga mjesta svjedoči srednjovjekovna nekropola na staroj ilirskoj gomili, bogata stećcima raznih veličina i oblika. Mjesto je kroz povijest pripadalo župama Drinovci, zatim Ružići, potom Široki Brijeg te konačno, Rasno.</p>
 <p>Župa Ledinac prvi put je utemeljena 1873. godine, a za patron župe uzet je Sveti Križ, po križu u ledinačkoj nekropoli. Međutim, Ledinac i Rasno nisu uspjeli riješiti gdje će biti sjedište župe, pa od 1878. godine, Ledinac i okolna sela se ponovno nalaze u sastavu župe Rasno.</p>
 <p> Župa je definitivno utemeljena 3. listopada 1930., na osnovi odluke biskupa fra Alojzija Mišića, odvajanjem pojedinih sela od Gruda, Ružića i Rasna. Prvi župnik, don Ante Čule, počeo je graditi veliku crkvu, s namjerom da tu bude svetište svete Terezije od Djeteta Isusa za čitav ovaj kraj. Temelji nove crkve blagoslovljeni su 1939., ali Drugi svjetski rat omeo je radove. Tek 1967. počelo je uređenje unutrašnjosti te je dovršen zvonik. Crkva je obnovljena krajem devedesetih godina prošloga stoljeća, a vanjska fasada je urađena 2000. godine, a 2015. završen je i zvonik, onako kako je odavno projektom planiran, te je tako u potpunosti dovršena izgradnja crkve. 
         </p>
+
     </section>
 
     <section id="novosti">
@@ -160,9 +194,10 @@ main section {
 
     <section id="obavijesti">
         <h2>Obavijesti</h2>
-        <ul>
-            //<li><a href="pdf/listic.pdf" target="_blank">Otvorite PDF listić</a></li>
+               <ul>
+           <li><a href="pdf/listic.pdf" target="_blank">Otvorite PDF listić</a></li>
         </ul>
+
     </section>
 
     <section id="sv-mala-terezija">
@@ -200,28 +235,32 @@ main section {
     </section>
 </main>
 
-<footer>
-    <p>Župa svete Terezije od Djeteta Isusa Ledinac</p>
-</footer>
-
 <script>
 function showSection(id) {
-    // Sakrij sve sekcije
     const sections = document.querySelectorAll('main section');
     sections.forEach(sec => sec.style.display = 'none');
 
-    // Sakrij uvodnu sliku
     const introImage = document.getElementById('intro-image');
     if(introImage){
         introImage.style.display = 'none';
     }
 
-    // Prikaži odabranu sekciju
     const selected = document.getElementById(id);
     if(selected){
         selected.style.display = 'block';
         selected.scrollIntoView({behavior:'smooth'});
     }
+
+    // Kad klikne link na mobitelu, zatvori meni
+    const navMenu = document.getElementById('navMenu');
+    if(window.innerWidth <= 768){
+        navMenu.classList.remove('active');
+    }
+}
+
+function toggleMenu() {
+    const navMenu = document.getElementById('navMenu');
+    navMenu.classList.toggle('active');
 }
 </script>
 
