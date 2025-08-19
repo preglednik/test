@@ -132,28 +132,39 @@ main section {
 @media (max-width: 768px) {
     .hamburger {
         display: block;
+        position: relative;   /* umjesto absolute */
+        top: 0;
+        margin: 10px auto;    /* spusti i centriraj ispod headera */
+        text-align: center;
     }
+
     nav {
         display: none;
         width: 100%;
     }
+
     nav.active {
         display: block;
     }
+
     .menu {
         flex-direction: column;
     }
+
     .menu li {
         flex: 1 1 100%;
     }
+
     h1 {
         font-size: 1.3em;
     }
+
     .center-image {
         max-width: 100%;
         margin: 20px auto;
     }
 }
+
 </style>
 </head>
 <body>
