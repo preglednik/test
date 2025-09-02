@@ -171,11 +171,13 @@ main section {
   margin: 15px 0;
   background-color: #f9f9f9;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.card h3 {
-  margin-top: 0;
-  color: #1f4f73;
+.card.expanded {
+  background-color: #fff;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -213,14 +215,14 @@ main section {
 <section id="novosti">
   <h2>Novosti</h2>
 
-  <div class="card">
+  <div class="card" onclick="openCard(this)">
     <h3>Devetnica sv. Tereziji</h3>
     <p>Devetnica će biti od 22. do 30. rujna 2025. Svete Mise su u 18.00 sati, dok je krunica u 17.30. 
     Svetkovinu zaštitnice župe proslavit ćemo u srijedu, 1. listopada 2025., u 18.00 sati. 
     Sveto misno slavlje predvodi vlč. Marko Kovač, kancelar Zagrebačke nadbiskupije.</p>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="openCard(this)">
     <h3>Sveta Terezija</h3>
     <p>Bla bla...</p>
   </div>
@@ -297,8 +299,23 @@ function toggleMenu() {
     navMenu.classList.toggle('active');
 }
 </script>
-
+<script>
+function openCard(card) {
+  const cards = document.querySelectorAll('#novosti .card');
+  
+  // ako već ima klasu expanded -> resetiraj
+  if (card.classList.contains('expanded')) {
+    cards.forEach(c => c.style.display = 'block');
+    card.classList.remove('expanded');
+  } else {
+    cards.forEach(c => {
+      c.style.display = 'none';
+      c.classList.remove('expanded');
+    });
+    card.style.display = 'block';
+    card.classList.add('expanded');
+  }
+}
+</script>
 </body>
 </html>
-
-
