@@ -164,7 +164,19 @@ main section {
         margin: 20px auto;
     }
 }
+.card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px 0;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
 
+.card h3 {
+  margin-top: 0;
+  color: #1f4f73;
+}
 </style>
 </head>
 <body>
@@ -198,10 +210,21 @@ main section {
 
     </section>
 
-    <section id="novosti">
-        <h2>Novosti</h2>
-        <p>Dana 22. rujna 2025. započinje devetnica sv. Tereziji od Djeteta Isusova i Svetoga Lica te traje do 30. rujna 2025. Svete Mise su u 18.00 sati, dok je krunica u 17.30. Svetkovinu zaštitnice župe proslavit ćemo u srijedu, 1. listopada 2025., u 18.00 sati. Sveto misno slavlje predvodi vlč. Marko Kovač, kancelar Zagrebačke nadbiskupije.</p>
-    </section>
+<section id="novosti">
+  <h2>Novosti</h2>
+
+  <div class="card">
+    <h3>Devetnica sv. Tereziji</h3>
+    <p>Devetnica će biti od 22. do 30. rujna 2025. Svete Mise su u 18.00 sati, dok je krunica u 17.30. 
+    Svetkovinu zaštitnice župe proslavit ćemo u srijedu, 1. listopada 2025., u 18.00 sati. 
+    Sveto misno slavlje predvodi vlč. Marko Kovač, kancelar Zagrebačke nadbiskupije.</p>
+  </div>
+
+  <div class="card">
+    <h3>Sveta Terezija</h3>
+    <p>Bla bla...</p>
+  </div>
+</section>
 
 <section id="obavijesti">
   <h2>Obavijesti</h2>
@@ -277,4 +300,5 @@ function toggleMenu() {
 
 </body>
 </html>
+
 
